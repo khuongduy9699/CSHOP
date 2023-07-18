@@ -1,0 +1,74 @@
+<div class="list-category-container">
+  <div class="header">
+    <button mat-button (click)="navigateBack()"><mat-icon>arrow_back</mat-icon>Back</button>
+    <h1 class="title">Category List <span class="reload" (click)="onReload()"><mat-icon matTooltip="Reload">cached</mat-icon></span></h1>
+    <button  mat-raised-button color="primary" (click)="openDialog()">+ Add Category</button>
+  </div>
+
+
+  <div class="mat-elevation-z8 list-category-table-wrap">
+    <div>
+      <mat-form-field class="search" appearance="fill">
+        <mat-label><mat-icon>search</mat-icon> Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search here" #inputFilter>
+      </mat-form-field>
+    </div>
+    <div [style.display]="isLoading?'block':'none'">
+      <div class="list-category-loading">
+        <mat-progress-spinner
+            mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+    </div>
+    <div [style.display]="!isLoading?'block':'none'">
+      <table class="list-category-table" mat-table [dataSource]="categories" matSort matSortActive="createdAt" matSortDirection="desc">
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id" sticky>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> <div class="truncateId" [matTooltip]="row._id">{{row._id}}</div> </td>
+        </ng-container>
+
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let row"> {{row.name | titlecase}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let row">
+            <img class="upload-img" [src]="getPhoto(row.image)" (click)="onImageClick(row.image)">
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+          <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button color="primary" (click)="onUpdateCategory(row)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="onDeleteCategory(row._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{inputFilter.value}}"</td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of categories"></mat-paginator>
+  </div>
+</div>
+

@@ -1,0 +1,23 @@
+mat-toolbar {
+  height: 80px;
+
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .search {
+    float: right;
+    mat-icon{
+      font-size: 20px
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 20px;
+  }
+
+  .logo {
+    cursor: pointer;
+  }
+
+}

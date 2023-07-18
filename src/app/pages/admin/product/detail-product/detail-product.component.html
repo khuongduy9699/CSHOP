@@ -1,0 +1,30 @@
+<div class="detail-product-container">
+  <button mat-button (click)="navigateBack()"><mat-icon>arrow_back</mat-icon>Back</button>
+  <h1 mat-dialog-title class="center">Detail Product</h1>
+
+  <div class="content">
+    <mat-card class="card">
+      <div class="buttons">
+        <button mat-icon-button color="primary" (click)="onUpdateProduct(product)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDeleteProduct(product._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <mat-card-header>
+        <mat-card-title-group>
+          <mat-card-title>Name: {{product?.name | titlecase}}</mat-card-title>
+        </mat-card-title-group>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="card-item">Price: {{ product?.price | currency :'VND'}}</div>
+        <div class="card-item">Description: {{ product?.description | titlecase }}</div>
+        <div class="card-item">Category: {{ product?.categoryName | titlecase }}</div>
+        <div class="card-item">Created At: {{ product?.createdAt }}</div>
+        <img class="card-image" [src]="getPhoto(product?.image)" (click)="onImageClick(product?.image||'')">
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

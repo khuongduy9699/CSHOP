@@ -1,0 +1,49 @@
+.container {
+  background-image: url("/assets/images/signup.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  height: 100%;
+
+  .content {
+    padding: 30px 0;
+    width: 50%;
+    height: auto;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255, 0.9);
+    border-radius: 10px;
+
+    .center {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .signUpForm {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .row {
+        width: 100%;
+        text-align: center;
+        mat-form-field {
+          width: 50%
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      padding: 0 25px 20px;
+      justify-content: center;
+      gap: 20px;
+    }
+  }
+}
+
+
+

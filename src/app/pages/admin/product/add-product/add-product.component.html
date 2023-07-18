@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Add Category</h1>
+<form [formGroup]="addForm" (ngSubmit)="onSubmitForm()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name">
+        <div *ngIf="name&&name.invalid && (name.dirty || name.touched)" [style.color]="'red'">{{addForm.controls.name.errors | showError}}</div>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <input matInput><input type="file" (change)="onLoadImage($event)">
+        <img *ngIf="image.src" class="upload-img" [src]="image.src">
+        <div *ngIf="img&& (img.dirty || img.touched)" [style.color]="'red'">{{addForm.controls.image.errors | showError}}</div>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <mat-hint>Unit VND</mat-hint>
+        <input matInput type="number" formControlName="price" step="1000">
+        <div *ngIf="price&&price.invalid && (price.dirty || price.touched)" [style.color]="'red'">{{addForm.controls.price.errors | showError}}</div>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput type="text" formControlName="description">
+        <div *ngIf="description&&description.invalid && (description.dirty || description.touched)" [style.color]="'red'">{{addForm.controls.description.errors | showError}}</div>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option *ngFor="let category of categories" [value]="category._id" >
+            {{category.name | titlecase}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="categoryId&&categoryId.invalid && (categoryId.dirty || categoryId.touched)" [style.color]="'red'">{{addForm.controls.categoryId.errors | showError}}</div>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="actions">
+    <button mat-raised-button [mat-dialog-close]="false" (click)="onCancel()">Cancel</button>
+    <ng-container *ngIf="isUpdate; else createButton">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </ng-container>
+    <ng-template #createButton>
+      <button mat-raised-button color="primary" type="submit">Create</button>
+    </ng-template>
+  </div>
+</form>

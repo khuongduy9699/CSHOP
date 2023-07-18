@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="sidebar">
+  <mat-expansion-panel hideToggle [expanded]="'true'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Category
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-chip-listbox class="category-container">
+      <mat-chip-option *ngFor="let category of categories" class="category-item" (selectionChange)="onCategoryChange(category._id||'')">{{category.name | titlecase}}</mat-chip-option>
+    </mat-chip-listbox>
+  </mat-expansion-panel>
+</div>
+
+
+<div class="main-section">
+  <div class="search">
+    <mat-form-field>
+      <mat-label><mat-icon>search</mat-icon></mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search here" #inputFilter>
+    </mat-form-field>
+  </div>
+    <div class="container">
+
+      <div class="card"  *ngFor="let product of products1" (click)="onProductClick(product._id||'')">
+
+            <img [src]="getPhoto(product.image)" class="card-img">
+            <div class="card-content">
+              <p class="name">
+                {{product.name | titlecase}}
+              </p>
+              <p>
+                {{product.price | currency :'VND'}}
+              </p>
+              <p>
+                {{product.description | titlecase}}
+              </p>
+            </div>
+
+      </div>
+    </div>
+</div>

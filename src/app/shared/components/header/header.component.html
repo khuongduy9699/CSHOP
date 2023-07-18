@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <span class="logo" (click)="navigateBackHome()">CSHOP</span>
+  <span class="example-spacer"></span>
+  <div class="buttons">
+    <!-- <button mat-raised-button (click)="openDialog()">+ Add User</button> -->
+    <button mat-button [matMenuTriggerFor]="menu">{{user.role | titlecase}}: {{user.name | titlecase}}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="navigateToAdminPage()">Admin</button>
+      <button mat-menu-item (click)="logOut()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

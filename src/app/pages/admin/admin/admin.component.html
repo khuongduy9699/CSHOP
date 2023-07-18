@@ -1,0 +1,14 @@
+<div class="admin-container">
+  <app-header>
+    <p>aloo</p>
+    <p class="alo">aloo1</p>
+  </app-header>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+    <a mat-tab-link *ngFor="let link of links" [routerLink]="link!=='User'?link.toLowerCase():'/admin'"
+    (click)="activeLink = link" [active]="activeLink==link"
+    routerLinkActive="active" ariaCurrentWhenActive="page">{{link}}</a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>

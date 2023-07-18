@@ -1,0 +1,44 @@
+<div class="list-product-container">
+  <div class="header">
+    <button mat-button (click)="navigateBack()"><mat-icon>arrow_back</mat-icon>Back</button>
+    <h1 class="title">Product List <span class="reload" (click)="onReload()"><mat-icon matTooltip="Reload">cached</mat-icon></span></h1>
+    <button  mat-raised-button color="primary" (click)="openDialog()">+ Add Product</button>
+  </div>
+
+
+  <div class="mat-elevation-z8 list-product-table-wrap">
+    <div >
+      <div class="filterByCategory">
+        <span>Filter By Category: </span>
+        <mat-chip-listbox class="category-container">
+          <mat-chip-option *ngFor="let category of categories" class="category-item"
+          (selectionChange)="onCategoryChange($event)" [value]="category._id">{{category.name | titlecase}} : {{category.productAmount}}</mat-chip-option>
+        </mat-chip-listbox>
+      </div>
+      <mat-form-field class="search">
+        <mat-label><mat-icon>search</mat-icon> Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search here" #inputFilter>
+      </mat-form-field>
+    </div>
+    <div [style.display]="isLoading?'block':'none'">
+      <div class="list-product-loading">
+        <mat-progress-spinner
+            mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+    </div>
+    <div [style.display]="!isLoading?'block':'none'">
+      <app-table-product 
+      [products]="products"
+      [inputFilter]="inputFilter"
+      (onUpdateProduct)="onUpdateProduct($event)"
+      (onDeleteProduct)="onDeleteProduct($event)"
+      (onImageClick)="onImageClick($event)"
+      (navigateToDetail)="navigateToDetail($event)"
+      >
+
+      </app-table-product>
+    </div>
+  </div>
+</div>
+

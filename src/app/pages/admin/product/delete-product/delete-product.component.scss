@@ -1,0 +1,11 @@
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+
+  div {
+    padding-bottom: 20px
+  }
+}

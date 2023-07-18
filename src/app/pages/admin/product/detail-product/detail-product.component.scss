@@ -1,0 +1,49 @@
+.detail-product-container {
+  height: calc(100% - 208px);
+
+  .center {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .content {
+    width:100%;
+    display: flex;
+    justify-content: center;
+
+    .card {
+      width: 80%;
+      height:auto;
+      font-size: 25px;
+
+      .card-item {
+        margin: 20px;
+        font-size: 20px;
+      }
+
+      mat-card-title {
+        color: cornflowerblue;
+        font-size: 25px;
+        margin: 20px;
+      }
+
+      .card-image {
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+
+      .buttons {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}
+
+
+
